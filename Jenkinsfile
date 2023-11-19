@@ -72,7 +72,7 @@ pipeline {
               }
             }
         }
-         /*
+         
 
         
         stage('Quality Gate') {
@@ -82,7 +82,7 @@ pipeline {
                 }
             }
         }
-        
+        /*
         stage("UploadArtifact") {
             steps{
                 nexusArtifactUploader(
