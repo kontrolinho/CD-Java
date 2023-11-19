@@ -61,8 +61,8 @@ pipeline {
             }
             steps {
                withSonarQubeEnv("${SONARSERVER}") {
-                   sh '''${scannerHome}/bin/sonar-scanner -Dsonar.projectKey=CI-using-Jenkins-Nexus-SonarQube-Terraform \
-                   -Dsonar.projectName=CI-using-Jenkins-Nexus-SonarQube-Terraform \
+                   sh '''${scannerHome}/bin/sonar-scanner -Dsonar.projectKey=CD-of-Java-Web-Application \
+                   -Dsonar.projectName=CD-of-Java-Web-Application \
                    -Dsonar.projectVersion=1.0 \
                    -Dsonar.sources=src/ \
                    -Dsonar.java.binaries=target/test-classes/com/visualpathit/account/controllerTest/ \
