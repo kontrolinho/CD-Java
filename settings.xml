@@ -1,0 +1,32 @@
+<settings>
+  <servers>
+    <server>
+      <id>${env.SNAP_REPO}</id>
+      <username>${env.NEXUS_USER}</username>
+      <password>${env.NEXUS_PASS}</password>
+    </server>
+    <server>
+      <id>${env.RELEASE_REPO}</id>
+      <username>${env.NEXUS_USER}</username>
+      <password>${env.NEXUS_PASS}</password>
+    </server>
+    <server>
+      <id>${env.CENTRAL_REPO}</id>
+      <username>${env.NEXUS_USER}</username>
+      <password>${env.NEXUS_PASS}</password>
+    </server>
+    <server>
+      <id>${env.NEXUS_GRP_REPO}</id>
+      <username>${env.NEXUS_USER}</username>
+      <password>${env.NEXUS_PASS}</password>
+    </server>
+  </servers>
+  <mirrors>
+    <mirror>
+      <id>${env.CENTRAL_REPO}</id>
+      <name>${env.CENTRAL_REPO}</name>
+      <url>http://${env.NEXUSIP}:${env.NEXUSPORT}/repository/${env.NEXUS_GRP_REPO}/</url>
+      <mirrorOf>*</mirrorOf>
+    </mirror>
+  </mirrors>
+</settings>
