@@ -42,12 +42,12 @@ pipeline {
                 }
             } 
         }
-/*
+
          stage('Test') {
             steps {
                 sh 'mvn -s settings.xml test'
             }
-        } */
+        } 
 
         stage('Checkstyle Analysis') {
             steps {
@@ -72,7 +72,7 @@ pipeline {
               }
             }
         }
-         
+         /*
 
         
         stage('Quality Gate') {
