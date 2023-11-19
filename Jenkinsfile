@@ -42,7 +42,7 @@ pipeline {
                 }
             } 
         }
-        /*
+        
          stage('Test') {
             steps {
                 sh 'mvn -s settings.xml test'
@@ -79,7 +79,7 @@ pipeline {
                     waitForQualityGate abortPipeline: true
                 }
             }
-        } */
+        }
         
         stage("UploadArtifact") {
             steps{
