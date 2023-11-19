@@ -18,3 +18,8 @@ sudo apt-get update
 sudo apt-get install jenkins -y
 
 sudo systemctl enable jenkins
+
+sudo apt update
+sudo apt install awscli -y
+
+sudo apt-get update
