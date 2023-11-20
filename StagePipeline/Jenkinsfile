@@ -26,6 +26,8 @@ pipeline {
         registryCredential = 'ecr:us-east-1:awscreds'
         appRegistry = '024936713889.dkr.ecr.us-east-1.amazonaws.com/ciecr'
         vprofileRegistry = 'https://024936713889.dkr.ecr.us-east-1.amazonaws.com'
+        cluster = 'cicdjenkins'
+        service = 'cistagesvc'
     }
 
 
@@ -118,6 +120,12 @@ pipeline {
                         dockerImage.push('latest')
                     }
                 }
+            }
+        }
+        stage ('Deploy to ECS staging') {
+            steps {
+                withAWS (credentials: 'awscreds', region: 'us-east-1')
+                sh 'aws ecs update-service --cluster ${cluster} --service ${service} --force-new-deployment'
             }
         }
     }
