@@ -4,7 +4,7 @@
 
 **You need to FORK this Repo**
 
-Install **Terraform** and **AWS CLI** for this simple Static Website on **AWS S3**.
+Install **Terraform** and **AWS CLI**.
 
 Check this [guide](https://developer.hashicorp.com/terraform/tutorials/aws-get-started/install-cli) for **Terraform**.
 
