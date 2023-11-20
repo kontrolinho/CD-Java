@@ -2,37 +2,35 @@ def COLOR_MAP = [
     'SUCCESS': 'good', 
     'FAILURE': 'danger',
 ]
-
 pipeline {
     agent any
 
-    environment {
-        NEXUS_USER = 'admin'
+    environment {        
         NEXUSPASS = credentials('nexuspass')
     }
+
     stages {
-        stage('Setup Parameters') {
+
+        stage('Setup parameters') {
             steps {
-                script{
-                    properties ({
-                        parameters ([
-                            string (
-                                defaultValue: '',
-                                name: 'BUILD',
+                script { 
+                    properties([
+                        parameters([
+                            string(
+                                defaultValue: '', 
+                                name: 'BUILD', 
                             ),
-                            string (
-                                defaultValue: '',
-                                name: 'TIME',
+							string(
+                                defaultValue: '', 
+                                name: 'TIME', 
                             )
                         ])
-                    })
+                    ])
                 }
             }
-        }
-    }
-
+		}
         
-        stage('Ansible deploy to Prod') {
+        stage('Ansible Deploy to Prod'){
             steps {
                 ansiblePlaybook([
                 inventory   : 'ansible/prod.inventory',
@@ -42,7 +40,7 @@ pipeline {
 			    credentialsId: 'AnsibleProd',
 			    disableHostKeyChecking: true,
                 extraVars   : [
-                   	USER: "${NEXUS_USER}",
+                   	USER: "admin",
                     PASS: "${NEXUSPASS}",
 			        nexusip: "172.31.29.87",
 			        reponame: "CI-Release",
@@ -54,14 +52,15 @@ pipeline {
                 ]
              ])
             }
-        } 
+        }
 
-       post {
+    }
+    post {
         always {
             echo 'Slack Notifications.'
             slackSend channel: '#jenkins',
                 color: COLOR_MAP[currentBuild.currentResult],
                 message: "*${currentBuild.currentResult}:* Job ${env.JOB_NAME} build ${env.BUILD_NUMBER} \n More info at: ${env.BUILD_URL}"
         }
-       }
-} 
+    }
+}
