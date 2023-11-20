@@ -101,7 +101,7 @@ pipeline {
                 )
             }
         }
-/*
+
         stage('Ansible deploy to staging') {
             steps {
                 ansiblePlaybook([
@@ -124,7 +124,7 @@ pipeline {
                 ]
              ])
             }
-        } */
+        } 
     }
        post {
         always {
