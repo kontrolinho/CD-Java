@@ -28,17 +28,17 @@ This will create:
 3 EC2s: Jenkins Instance, Nexus Instance and Sonar Instance.
 
 
-![alt text](https://github.com/kontrolinho/CI-using-Jenkins-Nexus-SonarQube-Terraform/blob/main/Read-Images/ec2.png)
+![alt text](https://github.com/kontrolinho/CICD-of-Java-Web-Application-using-Docker-Jenkins-Nexus-SonarQube-and-Terraform/blob/main/Read-Images/ec2.png)
 
 
 And 3 Security Groups, for each instance.
 
-![alt text](https://github.com/kontrolinho/CI-using-Jenkins-Nexus-SonarQube-Terraform/blob/main/Read-Images/3securitygroups.png)
+![alt text](https://github.com/kontrolinho/CICD-of-Java-Web-Application-using-Docker-Jenkins-Nexus-SonarQube-and-Terraform/blob/main/Read-Images/3securitygroups.png)
 
 And a edit for Jenkins connection for Sonar.
 
 
-![alt text](https://github.com/kontrolinho/CI-using-Jenkins-Nexus-SonarQube-Terraform/blob/main/Read-Images/jenkinssg.png)
+![alt text](https://github.com/kontrolinho/CICD-of-Java-Web-Application-using-Docker-Jenkins-Nexus-SonarQube-and-Terraform/blob/main/Read-Images/jenkinssg.png)
 
 
 ## Jenkins Post-Installation
@@ -52,7 +52,7 @@ Connect via SSH to your Jenkins Instance and use:
 Save your password.
 
 
-![alt text](https://github.com/kontrolinho/CI-using-Jenkins-Nexus-SonarQube-Terraform/blob/main/Read-Images/jenkinspassword.png)
+![alt text](https://github.com/kontrolinho/CICD-of-Java-Web-Application-using-Docker-Jenkins-Nexus-SonarQube-and-Terraform/blob/main/Read-Images/jenkinspassword.png)
 
 Copy your public IPv4 Address, and connect via browser using the port 8080 and paste your password.
 
@@ -95,7 +95,7 @@ Use at your SSH.
 
 ``` cat /opt/nexus/sonatype-work/nexus3/admin.password ```
 
-![alt text](https://github.com/kontrolinho/CI-using-Jenkins-Nexus-SonarQube-Terraform/blob/main/Read-Images/nexuspassword.png)
+![alt text](https://github.com/kontrolinho/CICD-of-Java-Web-Application-using-Docker-Jenkins-Nexus-SonarQube-and-Terraform/blob/main/Read-Images/nexuspassword.png)
 
 Use the password at nexus, and the username **admin** .
 
@@ -115,13 +115,13 @@ Let's create 4 repositories.
 
 At Proxy paste **Maven dependency URL**, this will be a repository for maven dependencies.
 
-![alt text](https://github.com/kontrolinho/CI-using-Jenkins-Nexus-SonarQube-Terraform/blob/main/Read-Images/MavenProxy.png)
+![alt text](https://github.com/kontrolinho/CICD-of-Java-Web-Application-using-Docker-Jenkins-Nexus-SonarQube-and-Terraform/blob/main/Read-Images/MavenProxy.png)
 
 **maven2(hosted)**
 
 Change Version Policy to **Snapshot**.
 
-![alt text](https://github.com/kontrolinho/CI-using-Jenkins-Nexus-SonarQube-Terraform/blob/main/Read-Images/MavenSnapshot.png)
+![alt text](https://github.com/kontrolinho/CICD-of-Java-Web-Application-using-Docker-Jenkins-Nexus-SonarQube-and-Terraform/blob/main/Read-Images/MavenSnapshot.png)
 
 **maven2(group)**
 
@@ -129,7 +129,7 @@ At ```Group -> Member Repositories```, select the other repositories you created
 
 This repository will group the other repositories.
 
-![alt text](https://github.com/kontrolinho/CI-using-Jenkins-Nexus-SonarQube-Terraform/blob/main/Read-Images/MavenGroup.png)
+![alt text](https://github.com/kontrolinho/CICD-of-Java-Web-Application-using-Docker-Jenkins-Nexus-SonarQube-and-Terraform/blob/main/Read-Images/MavenGroup.png)
 
 **Save the name from your repositories**
 
@@ -154,7 +154,7 @@ For **JDK**, we need to install JDK 11 and JDK 8:
 
 click at Add JDK, and do this for JDK 8.
 
-![alt text](https://github.com/kontrolinho/CI-using-Jenkins-Nexus-SonarQube-Terraform/blob/main/Read-Images/JDK.png)
+![alt text](https://github.com/kontrolinho/CICD-of-Java-Web-Application-using-Docker-Jenkins-Nexus-SonarQube-and-Terraform/blob/main/Read-Images/JDK.png)
 
 For **Maven**, click at Add Maven.
 
@@ -164,7 +164,7 @@ For **Maven**, click at Add Maven.
 
 **Version**: 3.9.5
 
-![alt text](https://github.com/kontrolinho/CI-using-Jenkins-Nexus-SonarQube-Terraform/blob/main/Read-Images/MAVEN3.png)
+![alt text](https://github.com/kontrolinho/CICD-of-Java-Web-Application-using-Docker-Jenkins-Nexus-SonarQube-and-Terraform/blob/main/Read-Images/MAVEN3.png)
 
 Save.
 
@@ -199,7 +199,7 @@ At file called Jenkinsfile, configure the environment:
 ```NEXUS_LOGIN``` **ID** you previously created at Jenkins Credentials.
 
 
-![alt text](https://github.com/kontrolinho/CI-using-Jenkins-Nexus-SonarQube-Terraform/blob/main/Read-Images/JenkinsEnvironment.png)
+![alt text](https://github.com/kontrolinho/CICD-of-Java-Web-Application-using-Docker-Jenkins-Nexus-SonarQube-and-Terraform/blob/main/Read-Images/JenkinsEnvironment.png)
 
 ## Jenkins Pipeline Job
 
@@ -213,7 +213,7 @@ At ``` Pipeline -> Definition ``` select ``` Pipeline Script from SCM ```
 
 **Repositories -> Repository URL** paste your **Forked URL**, its at **YOUR PROFILE**.
 
-![alt text](https://github.com/kontrolinho/CI-using-Jenkins-Nexus-SonarQube-Terraform/blob/main/Read-Images/SSH_Github.png)
+![alt text](https://github.com/kontrolinho/CICD-of-Java-Web-Application-using-Docker-Jenkins-Nexus-SonarQube-and-Terraform/blob/main/Read-Images/SSH_Github.png)
 
 **Credentials** select ```Add -> Jenkins```
 
@@ -239,7 +239,7 @@ This is your **PRIVATE Key**, copy and paste at **Key**.
 
 **Add**.
 
-![alt text](https://github.com/kontrolinho/CI-using-Jenkins-Nexus-SonarQube-Terraform/blob/main/Read-Images/Github_Key.png)
+![alt text](https://github.com/kontrolinho/CICD-of-Java-Web-Application-using-Docker-Jenkins-Nexus-SonarQube-and-Terraform/blob/main/Read-Images/Github_Key.png)
 
 ## Resolving Error Code 128
 
@@ -257,7 +257,7 @@ paste this, switching to your **Repository SSH**:
 
 ``` git ls-remote -h YOUR_REPOSITORY_SSH HEAD```
 
-![alt text](https://github.com/kontrolinho/CI-using-Jenkins-Nexus-SonarQube-Terraform/blob/main/Read-Images/SSH_Github.png)
+![alt text](https://github.com/kontrolinho/CICD-of-Java-Web-Application-using-Docker-Jenkins-Nexus-SonarQube-and-Terraform/blob/main/Read-Images/SSH_Github.png)
 
 If you get an error, **don't worry**, only needed to store your Private Key.
 
@@ -267,14 +267,14 @@ You can check the auth with ``` cat .ssh/known_hosts ```
 
 **Branches to Build -> Branch Specifier** type ``` */main ```, Github don't uses master branch as main branch.
 
-![alt text](https://github.com/kontrolinho/CI-using-Jenkins-Nexus-SonarQube-Terraform/blob/main/Read-Images/JenkinsBranch.png)
+![alt text](https://github.com/kontrolinho/CICD-of-Java-Web-Application-using-Docker-Jenkins-Nexus-SonarQube-and-Terraform/blob/main/Read-Images/JenkinsBranch.png)
 
 **Save**.
 
 Now at Pipeline Page, click at Build Now.
 
 
-![alt text](https://github.com/kontrolinho/CI-using-Jenkins-Nexus-SonarQube-Terraform/blob/main/Read-Images/Finished_Success.png)
+![alt text](https://github.com/kontrolinho/CICD-of-Java-Web-Application-using-Docker-Jenkins-Nexus-SonarQube-and-Terraform/blob/main/Read-Images/Finished_Success.png)
 
 
 **Good Job** now your Jenkins have all **Maven Dependencies**.
@@ -291,7 +291,7 @@ At your forked project, ```Settings -> Webhook```.
 
 **Content type** select ```application/json```.
 
-![alt text](https://github.com/kontrolinho/CI-using-Jenkins-Nexus-SonarQube-Terraform/blob/main/Read-Images/Payload_Webhook.png)
+![alt text](https://github.com/kontrolinho/CICD-of-Java-Web-Application-using-Docker-Jenkins-Nexus-SonarQube-and-Terraform/blob/main/Read-Images/Payload_Webhook.png)
 
 **Add Webhook**
 
@@ -301,7 +301,7 @@ If are everything fine, there's a Green Check at the left
 
 If something is wrong, there a Red X, **check the IP, Port, Security Group**.
 
-![alt text](https://github.com/kontrolinho/CI-using-Jenkins-Nexus-SonarQube-Terraform/blob/main/Read-Images/Webhook_Success.png)
+![alt text](https://github.com/kontrolinho/CICD-of-Java-Web-Application-using-Docker-Jenkins-Nexus-SonarQube-and-Terraform/blob/main/Read-Images/Webhook_Success.png)
 
 Back to **Pipeline at Jenkins**, click at **Configure**
 
@@ -316,7 +316,7 @@ At Jenkinsfile:
 
 And after commit:
 
-![alt text](https://github.com/kontrolinho/CI-using-Jenkins-Nexus-SonarQube-Terraform/blob/main/Read-Images/JenkinsAuto.png)
+![alt text](https://github.com/kontrolinho/CICD-of-Java-Web-Application-using-Docker-Jenkins-Nexus-SonarQube-and-Terraform/blob/main/Read-Images/JenkinsAuto.png)
 
 
 ## Code Analysis with SonarQube
@@ -356,7 +356,7 @@ and click at **Generate**
 Copy your **Generated Token**.
 
 
-![alt text](https://github.com/kontrolinho/CI-using-Jenkins-Nexus-SonarQube-Terraform/blob/main/Read-Images/jenkinstokensonar.png)
+![alt text](https://github.com/kontrolinho/CICD-of-Java-Web-Application-using-Docker-Jenkins-Nexus-SonarQube-and-Terraform/blob/main/Read-Images/jenkinstokensonar.png)
 
 Back to **Server authentication token** at **Jenkins**.
 
@@ -372,20 +372,20 @@ Select **sonartoken** at **Server Autentication Token**
 
 **Save**
 
-![alt text](https://github.com/kontrolinho/CI-using-Jenkins-Nexus-SonarQube-Terraform/blob/main/Read-Images/jenkinssonar.png)
+![alt text](https://github.com/kontrolinho/CICD-of-Java-Web-Application-using-Docker-Jenkins-Nexus-SonarQube-and-Terraform/blob/main/Read-Images/jenkinssonar.png)
 
 
 Jenkins:
 
-![alt text](https://github.com/kontrolinho/CI-using-Jenkins-Nexus-SonarQube-Terraform/blob/main/Read-Images/jenkinsanalysis.png)
+![alt text](https://github.com/kontrolinho/CICD-of-Java-Web-Application-using-Docker-Jenkins-Nexus-SonarQube-and-Terraform/blob/main/Read-Images/jenkinsanalysis.png)
 
 Sonar:
 
-![alt text](https://github.com/kontrolinho/CI-using-Jenkins-Nexus-SonarQube-Terraform/blob/main/Read-Images/sonaranalysis.png)
+![alt text](https://github.com/kontrolinho/CICD-of-Java-Web-Application-using-Docker-Jenkins-Nexus-SonarQube-and-Terraform/blob/main/Read-Images/sonaranalysis.png)
 
 ## SonarQube Quality Gates
 
-![alt text](https://github.com/kontrolinho/CI-using-Jenkins-Nexus-SonarQube-Terraform/blob/main/Read-Images/quality.png)
+![alt text](https://github.com/kontrolinho/CICD-of-Java-Web-Application-using-Docker-Jenkins-Nexus-SonarQube-and-Terraform/blob/main/Read-Images/quality.png)
 
 As you can see, with the **Default** SonarQube Quality Gates, the code **passed** from the test, let's **change the Quality Gates**.
 
@@ -397,7 +397,7 @@ Under **Add Condition** select **On Overall Code**,
 
 and **Quality Gate Fails when**, select **Bugs**, and select a **Value**.
 
-![alt text](https://github.com/kontrolinho/CI-using-Jenkins-Nexus-SonarQube-Terraform/blob/main/Read-Images/bugs.png)
+![alt text](https://github.com/kontrolinho/CICD-of-Java-Web-Application-using-Docker-Jenkins-Nexus-SonarQube-and-Terraform/blob/main/Read-Images/bugs.png)
 
 If you want it FAIL, set to **25**.
 
@@ -415,7 +415,7 @@ URL: Use the PRIVATE IPv4 of Jenkins Instance, and the Port. and add ```/sonarqu
 
 ``` http://172.31.30.10:8080/sonarqube-webhook ```
 
-![alt text](https://github.com/kontrolinho/CI-using-Jenkins-Nexus-SonarQube-Terraform/blob/main/Read-Images/sonarwebhook.png)
+![alt text](https://github.com/kontrolinho/CICD-of-Java-Web-Application-using-Docker-Jenkins-Nexus-SonarQube-and-Terraform/blob/main/Read-Images/sonarwebhook.png)
 
 ## Jenkins Stage Quality Gates
 
@@ -423,11 +423,11 @@ Remove the Comment brakets from ```Jenkinsfile``` at **Stage Quality Gate**
 
 This will timeout when the QualityGate doesn't respond, so don't wait for infinity, it waits for maximum 1 hour, it can be minutes changing unit: 'HOURS'.
 
-![alt text](https://github.com/kontrolinho/CI-using-Jenkins-Nexus-SonarQube-Terraform/blob/main/Read-Images/qualityfail.png)
+![alt text](https://github.com/kontrolinho/CICD-of-Java-Web-Application-using-Docker-Jenkins-Nexus-SonarQube-and-Terraform/blob/main/Read-Images/qualityfail.png)
 
 But we want it to pass, only raise the bar, Update the condition from Quality Gate at SonarQube to 100.
 
-![alt text](https://github.com/kontrolinho/CI-using-Jenkins-Nexus-SonarQube-Terraform/blob/main/Read-Images/cond.png)
+![alt text](https://github.com/kontrolinho/CICD-of-Java-Web-Application-using-Docker-Jenkins-Nexus-SonarQube-and-Terraform/blob/main/Read-Images/cond.png)
 
 ## Timestamp
 
@@ -439,7 +439,7 @@ Under Build Timestamp, we can change **Timezone** (Brazil/East), (Africa/Cairo).
 
 and the **Pattern**.
 
-![alt text](https://github.com/kontrolinho/CI-using-Jenkins-Nexus-SonarQube-Terraform/blob/main/Read-Images/timestamp.png)
+![alt text](https://github.com/kontrolinho/CICD-of-Java-Web-Application-using-Docker-Jenkins-Nexus-SonarQube-and-Terraform/blob/main/Read-Images/timestamp.png)
 
 ## Slack Notification
 
@@ -447,7 +447,7 @@ Create an Account at [Slack](http://www.slack.com)
 
 Visit the [Apps to Slack](https://slack.com/apps) and search for **Jenkins CI**
 
-![alt text](https://github.com/kontrolinho/CI-using-Jenkins-Nexus-SonarQube-Terraform/blob/main/Read-Images/slackj.png)
+![alt text](https://github.com/kontrolinho/CICD-of-Java-Web-Application-using-Docker-Jenkins-Nexus-SonarQube-and-Terraform/blob/main/Read-Images/slackj.png)
 
 And click at the Button **Add to Slack**.
 
@@ -486,11 +486,9 @@ Click at **Test Connection**
 Lets make the message, remove the comment brakets at ```Jenkinsfile```, at **Post Slack Notifications**.
 And, the colors for it! Remove the comment brakets at **Def**.
 
-![alt text](https://github.com/kontrolinho/CI-using-Jenkins-Nexus-SonarQube-Terraform/blob/main/Read-Images/slackst.png)
+![alt text](https://github.com/kontrolinho/CICD-of-Java-Web-Application-using-Docker-Jenkins-Nexus-SonarQube-and-Terraform/blob/main/Read-Images/slackst.png)
 
 So, when a Developer makes a code Change, they commit to the repository, it's going to build the artifact, download dependencies from Nexus, Unit tests, Code Analysis, a Sonar Analysis uploading all the results on the SonarQube Server, and If the Quality Gates are passed, upload the Artifact to the Repository, and send a Notification if the code passed or failed in the Slack.
-
-# CD-of-Java-Web-Application
 
 ## Terraform
 
@@ -542,7 +540,7 @@ Now you need to add Jenkins User to Docker's Group
 
 ```id jenkins```
 
-;;;IMAGEDOCKERGROUP
+![alt text](https://github.com/kontrolinho/CICD-of-Java-Web-Application-using-Docker-Jenkins-Nexus-SonarQube-and-Terraform/blob/main/Read-Images/jenkinsgroup.png)
 
 and restart jenkins:
 ```systemctl restart jenkins```
@@ -557,7 +555,7 @@ registryCredential: Your AWS Region, at my case im using us-east-1.
 
 appRegistry: Your Repository URI at Amazon Elastic Container Registry.
 
-;;ImageAmazonECR
+![alt text](https://github.com/kontrolinho/CICD-of-Java-Web-Application-using-Docker-Jenkins-Nexus-SonarQube-and-Terraform/blob/main/Read-Images/amazonecr.png)
 
 vprofileRegistry: 'https://PASTE_YOUR_URI_WITHOUT_/NAME'
 
@@ -590,9 +588,9 @@ and at **Script Path** specify the path for JenkinsFile, at my case ```StagePipe
 
 Click at **Build Now**.
 
-;;;IMAGECICDPIPELINE1
+![alt text](https://github.com/kontrolinho/CICD-of-Java-Web-Application-using-Docker-Jenkins-Nexus-SonarQube-and-Terraform/blob/main/Read-Images/cicdpipeline1.png)
 
-;;;IMAGECICDPIPELINE2
+![alt text](https://github.com/kontrolinho/CICD-of-Java-Web-Application-using-Docker-Jenkins-Nexus-SonarQube-and-Terraform/blob/main/Read-Images/cicdpipeline2.png)
 
 ## AWS ECS Task Definition
 
