@@ -130,6 +130,8 @@ pipeline {
             }
         }
     }
+
+    // test
        post {
         always {
             echo 'Slack Notifications.'
