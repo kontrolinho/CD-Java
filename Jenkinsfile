@@ -89,7 +89,7 @@ pipeline {
                   protocol: 'http',
                   nexusUrl: "${NEXUSIP}:${NEXUSPORT}",
                   groupId: 'QA',
-                  version: "${env.BUILD_ID}_${env.BUILD_TIMESTAMP}",
+                  version: "${env.BUILD_ID}-${env.BUILD_TIMESTAMP}",
                   repository: "${RELEASE_REPO}",
                   credentialsId: "${NEXUS_LOGIN}",
                   artifacts: [
@@ -111,15 +111,15 @@ pipeline {
 			    credentialsId: 'AnsibleLogin',
 			    disableHostKeyChecking: true,
                 extraVars   : [
-                   	USER: 'admin',
-                    PASS: 'admin123',
+                   	USER: "${NEXUS_USER}",
+                    PASS: "${NEXUS_PASS}",
 			        nexusip: "172.31.29.87",
 			        reponame: "CI-Release",
 			        groupid: "QA",
 			        time: "${env.BUILD_TIMESTAMP}",
 			        build: "${env.BUILD_ID}",
                     artifactid: "vproapp",
-			        vprofile_version: "vproapp-${env.BUILD_ID}_${env.BUILD_TIMESTAMP}.war"
+			        vprofile_version: "vproapp-${env.BUILD_ID}-${env.BUILD_TIMESTAMP}.war"
                 ]
              ])
             }
