@@ -23,6 +23,7 @@ pipeline {
         NEXUS_LOGIN = 'nexuslogin'
         SONARSERVER = 'sonarserver'
         SONARSCANNER = 'sonarscanner'
+        NEXUSPASS = credentials('nexuspass')
     }
 
 
@@ -111,7 +112,7 @@ pipeline {
 			    disableHostKeyChecking: true,
                 extraVars   : [
                    	USER: "admin",
-                    PASS: "${NEXUS_PASS}",
+                    PASS: "${NEXUSPASS}",
 			        nexusip: "172.31.29.87",
 			        reponame: "CI-Release",
 			        groupid: "QA",
