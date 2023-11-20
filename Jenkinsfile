@@ -111,8 +111,8 @@ pipeline {
 			    credentialsId: 'AnsibleLogin',
 			    disableHostKeyChecking: true,
                 extraVars   : [
-                   	USER: "admin",
-                    PASS: "admin123",
+                   	USER: 'admin',
+                    PASS: 'admin123',
 			        nexusip: "172.31.29.87",
 			        reponame: "CI-Release",
 			        groupid: "QA",
