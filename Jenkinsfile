@@ -113,7 +113,7 @@ pipeline {
 			    disableHostKeyChecking: true,
                 extraVars   : [
                    	USER: "${NEXUS_USER}",
-                    PASS: "${NEXUS_PASS}",
+                    PASS: "${NEXUSPASS}",
 			        nexusip: "172.31.29.87",
 			        reponame: "CI-Release",
 			        groupid: "QA",
