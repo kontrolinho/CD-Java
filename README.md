@@ -496,7 +496,9 @@ Terraform will create a IAM User cicd-jenkins, with policies ECSFullAccess, and 
 
 A private ECR  with encryption type AES256, and mutable.
 
-First of all, enter at AWS IAM, Users, the created user and Create a new Access Key. Save the .CSV file.
+First of all, enter at AWS IAM, Users, the created user and Create a new Access Key. 
+
+Save the .CSV file.
 
 ## Jenkins
 
@@ -622,7 +624,7 @@ Now create a task definition
 
 **Memory** = 2GB
 
-;;IMAGEINFRA
+![alt text](https://github.com/kontrolinho/CICD-of-Java-Web-Application-using-Docker-Jenkins-Nexus-SonarQube-and-Terraform/blob/main/Read-Images/ImageInfra.png)
 
 **Container 1**
 
@@ -638,7 +640,8 @@ Now create a task definition
 
 **Memory**: 2GB
 
-;;IMAGECONTAINER
+![alt text](https://github.com/kontrolinho/CICD-of-Java-Web-Application-using-Docker-Jenkins-Nexus-SonarQube-and-Terraform/blob/main/Read-Images/ImageContainer.png)
+
 
 
 ## Creating an ECS Service
@@ -649,14 +652,15 @@ Under **Environment**, **compute configuration (advanced)**
 
 **Compute Options**: Launch type
 
-;;;IMAGEECSEnvi
+![alt text](https://github.com/kontrolinho/CICD-of-Java-Web-Application-using-Docker-Jenkins-Nexus-SonarQube-and-Terraform/blob/main/Read-Images/ECSEnvi.png)
 
 
 Under **Deployment configuration**, at **Family** select your **Task Definition Family**
 
 **Service name**: Name your service.
 
-;;;ImageDeployC
+
+![alt text](https://github.com/kontrolinho/CICD-of-Java-Web-Application-using-Docker-Jenkins-Nexus-SonarQube-and-Terraform/blob/main/Read-Images/DeployC.png)
 
 
 Under **Networking** at **Security Group**, create a **new security group**
@@ -669,7 +673,8 @@ Under **Inbound rules for security groups**
 
 **Source**: Anywhere
 
-;;;ImageSGECS
+![alt text](https://github.com/kontrolinho/CICD-of-Java-Web-Application-using-Docker-Jenkins-Nexus-SonarQube-and-Terraform/blob/main/Read-Images/sgECS.png)
+
 
 Under **Load Balancing - optional**
 
@@ -679,7 +684,7 @@ Under **Load Balancing - optional**
 
 **Health Check grace period**: 30 seconds
 
-;;;IMAGE CIALB
+![alt text](https://github.com/kontrolinho/CICD-of-Java-Web-Application-using-Docker-Jenkins-Nexus-SonarQube-and-Terraform/blob/main/Read-Images/cialb.png)
 
 Under Target Group
 
@@ -687,7 +692,7 @@ Under Target Group
 
 **Health check path**: /login
 
-;;;ImageCITG
+![alt text](https://github.com/kontrolinho/CICD-of-Java-Web-Application-using-Docker-Jenkins-Nexus-SonarQube-and-Terraform/blob/main/Read-Images/citg.png)
 
 
 ## Target Groups
@@ -698,8 +703,7 @@ Under **Health Checks** click at **Advanced health checks settings**
 
 **Health check port**: Select **Overrite** and set 8080
 
-
-;;;IMAGEtg8080
+![alt text](https://github.com/kontrolinho/CICD-of-Java-Web-Application-using-Docker-Jenkins-Nexus-SonarQube-and-Terraform/blob/main/Read-Images/tg8080.png)
 
 
 **Save**.
@@ -728,8 +732,7 @@ and
 
 **Save Rules**
 
-
-;;;IMAGEINBRULE
+![alt text](https://github.com/kontrolinho/CICD-of-Java-Web-Application-using-Docker-Jenkins-Nexus-SonarQube-and-Terraform/blob/main/Read-Images/inbrule.png)
 
 
 ## Pipeline for ECS
@@ -759,7 +762,8 @@ Under **Cluster configuration**
 
 **Cluster name**: Name your cluster
 
-;;IMAGE ProdCluster
+
+![alt text](https://github.com/kontrolinho/CICD-of-Java-Web-Application-using-Docker-Jenkins-Nexus-SonarQube-and-Terraform/blob/main/Read-Images/prodcluster.png)
 
 
 Create a **Task Definition**:
@@ -768,7 +772,8 @@ Create a **Task Definition**:
 
 Under **Task definition configuration** at **Task definition family**, **name your Task Definition**.
 
-;;;IMAGECIPRODTASK
+
+![alt text](https://github.com/kontrolinho/CICD-of-Java-Web-Application-using-Docker-Jenkins-Nexus-SonarQube-and-Terraform/blob/main/Read-Images/ciprodtask.png)
 
 
 Under **Infrastructure requirements**:
@@ -779,7 +784,8 @@ Under **Infrastructure requirements**:
 
 **Memory**: 2GB
 
-;;IMAGEinfraMEM
+
+![alt text](https://github.com/kontrolinho/CICD-of-Java-Web-Application-using-Docker-Jenkins-Nexus-SonarQube-and-Terraform/blob/main/Read-Images/inframem.png)
 
 
 Under **Container - 1**, Container Details:
@@ -792,7 +798,8 @@ Under **Container - 1**, Container Details:
 
 **Memory hard limit**: 2
 
-;;;IMAGEcontProd
+
+![alt text](https://github.com/kontrolinho/CICD-of-Java-Web-Application-using-Docker-Jenkins-Nexus-SonarQube-and-Terraform/blob/main/Read-Images/contprod.png)
 
 
 ## Creating Launch Type Service
@@ -803,7 +810,8 @@ Enter at your ```Prod Cluster -> Services -> Create (Deploy)```
 
 Under **Environment**, Compute configuration (advanced), **Compute options**, select **Launch Type**
 
-;;;IMAGELAUNCHprod
+
+![alt text](https://github.com/kontrolinho/CICD-of-Java-Web-Application-using-Docker-Jenkins-Nexus-SonarQube-and-Terraform/blob/main/Read-Images/launchprod.png)
 
 
 Under **Deployment Configuration**,
@@ -812,7 +820,8 @@ Under **Deployment Configuration**,
 
 **Service Name**: Name your prod service.
 
-;;;IMAGEPRODSVC
+
+![alt text](https://github.com/kontrolinho/CICD-of-Java-Web-Application-using-Docker-Jenkins-Nexus-SonarQube-and-Terraform/blob/main/Read-Images/prodsvc.png)
 
 
 Under **Networking**,
@@ -827,7 +836,7 @@ At **Inbound rules for security groups**,
 
 **Source**: Anywhere
 
-;;;IMAGEPRODSG
+![alt text](https://github.com/kontrolinho/CICD-of-Java-Web-Application-using-Docker-Jenkins-Nexus-SonarQube-and-Terraform/blob/main/Read-Images/prodsg.png)
 
 
 Under **Load balancing - optional**,
@@ -836,7 +845,8 @@ Under **Load balancing - optional**,
 
 **Health check grace period**: 30 seconds
 
-;;;IMAGEprodalbsec
+
+![alt text](https://github.com/kontrolinho/CICD-of-Java-Web-Application-using-Docker-Jenkins-Nexus-SonarQube-and-Terraform/blob/main/Read-Images/prodalbsec.png)
 
 
 Under **Target group**,
@@ -845,7 +855,8 @@ Under **Target group**,
 
 **Health check path**: /login
 
-;;IMAGEprodtg
+
+![alt text](https://github.com/kontrolinho/CICD-of-Java-Web-Application-using-Docker-Jenkins-Nexus-SonarQube-and-Terraform/blob/main/Read-Images/prodtg.png)
 
 
 **Create**
@@ -861,9 +872,12 @@ environment -> service = Service Cluster Prod Name, at my case ```ciprodsvc```
 
 **Stage Deploy to prod ECS -> Steps withAWS -> Region**: Type your AWS Region, at my case ```us-east-1```
 
-;;;IMAGEciprodJEN
-;;;IMAGEciprodSVC
-;;;IMAGEciprod
+
+![alt text](https://github.com/kontrolinho/CICD-of-Java-Web-Application-using-Docker-Jenkins-Nexus-SonarQube-and-Terraform/blob/main/Read-Images/ciprod.png)
+
+![alt text](https://github.com/kontrolinho/CICD-of-Java-Web-Application-using-Docker-Jenkins-Nexus-SonarQube-and-Terraform/blob/main/Read-Images/ciprodjen.png)
+
+![alt text](https://github.com/kontrolinho/CICD-of-Java-Web-Application-using-Docker-Jenkins-Nexus-SonarQube-and-Terraform/blob/main/Read-Images/ciprodsvc.png)
 
 
 ## Create a Jenkins Production Pipeline
@@ -872,7 +886,8 @@ environment -> service = Service Cluster Prod Name, at my case ```ciprodsvc```
 
 Name your **CICD Pipeline Prod**, and **Replicate the Pipeline from Docker Pipeline**.
 
-;;;Imagecopypipe
+
+![alt text](https://github.com/kontrolinho/CICD-of-Java-Web-Application-using-Docker-Jenkins-Nexus-SonarQube-and-Terraform/blob/main/Read-Images/cicopypipe.png)
 
 Under **Branches to build**,
 
@@ -897,7 +912,8 @@ Under **Advanced Health Check Settings**,
 
 **Save**
 
-;;;ImageProdOver
+
+![alt text](https://github.com/kontrolinho/CICD-of-Java-Web-Application-using-Docker-Jenkins-Nexus-SonarQube-and-Terraform/blob/main/Read-Images/prodover.png)
 
 
 ## Prod Security Group 
