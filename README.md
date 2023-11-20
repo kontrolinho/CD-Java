@@ -1,4 +1,4 @@
-# CI using Jenkins, Nexus, SonarQube and Terraform
+# CICD of Java Web Application using Jenkins, Nexus, SonarQube and Terraform
 
 ## Prerequisites
 
