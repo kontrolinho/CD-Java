@@ -887,7 +887,7 @@ environment -> service = Service Cluster Prod Name, at my case ```ciprodsvc```
 Name your **CICD Pipeline Prod**, and **Replicate the Pipeline from Docker Pipeline**.
 
 
-![alt text](https://github.com/kontrolinho/CICD-of-Java-Web-Application-using-Docker-Jenkins-Nexus-SonarQube-and-Terraform/blob/main/Read-Images/cicopypipe.png)
+![alt text](https://github.com/kontrolinho/CICD-of-Java-Web-Application-using-Docker-Jenkins-Nexus-SonarQube-and-Terraform/blob/main/Read-Images/copypipe.png)
 
 Under **Branches to build**,
 
@@ -948,6 +948,8 @@ Under **Block Device** Select the **Volume** from **Volume ID**
 ```Actions -> Modify Volume```
 
 **Size (GiB)** increase to **15**
+
+**Sometimes you will need to STOP your Instance and Start again**
 
 ![alt text](https://github.com/kontrolinho/CICD-of-Java-Web-Application-using-Docker-Jenkins-Nexus-SonarQube-and-Terraform/blob/main/Read-Images/volumesize.png)
 
@@ -1021,7 +1023,6 @@ First of all **SSH into Jenkins Instance**.
 
 And now visit this [guide](https://docs.ansible.com/ansible/latest/installation_guide/installation_distros.html#installing-ansible-on-ubuntu) to install Ansible into Ubuntu.
 
-;;;ImageAnsibleInst
 
 And now install **Ansible Plugin** into **Jenkins**
 
@@ -1147,7 +1148,7 @@ And paste your Ansible Instance Private Keypair (open with notepad .pem and past
 
 So ansible will use this credential to login to App Server
 
-![alt text](https://github.com/kontrolinho/CICD-of-Java-Web-Application-using-Docker-Jenkins-Nexus-SonarQube-and-Terraform/blob/main/Read-Images/sshprod.png)
+![alt text](https://github.com/kontrolinho/CICD-of-Java-Web-Application-using-Docker-Jenkins-Nexus-SonarQube-and-Terraform/blob/main/Read-Images/SSHProd.png)
 
 
 
