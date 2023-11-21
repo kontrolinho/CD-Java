@@ -1,4 +1,4 @@
-# CICD of Java Web Application using Docker, Jenkins, Nexus, SonarQube and Terraform
+# CICD of Java Web Application using Ansible, Docker, Jenkins, Nexus, SonarQube and Terraform
 
 ## Prerequisites
 
@@ -935,3 +935,253 @@ and
 **Source**: Anywhere IPv6
 
 **Save Rules**
+
+
+## Continuous Delivery and Configuration Management Using Jenkins and Ansible
+
+First of all increase the Volume Size of Jenkins Instance at AWS.
+
+```AWS Console -> EC2 -> Jenkins Instance -> Storage```
+
+Under **Block Device** Select the **Volume** from **Volume ID**
+
+```Actions -> Modify Volume```
+
+**Size (GiB)** increase to **15**
+
+![alt text](https://github.com/kontrolinho/CICD-of-Java-Web-Application-using-Docker-Jenkins-Nexus-SonarQube-and-Terraform/blob/main/Read-Images/volumesize.png)
+
+
+
+## Create a Instance for Ansible
+
+```AnsibleInstance.tf``` will create a Instance for Ansible, similar to Jenkins instance, and their respective Security Group.
+
+Copy the Private IPv4 from AnsibleInstance01.
+
+
+## Route 53 Hosted Zone
+
+Access the Route53 page, and click at Create Hosted zone.
+
+**Domain name**: Name your Domain, use dot (.)
+
+**Type**: Private Hosted Zone
+
+Under **VPCs to associate with the hosted zone**:
+
+**Region**: Select your region, at my case ```us-east-1```
+
+**VPC ID**: Default VPC
+
+**Create hosted zone**.
+
+![alt text](https://github.com/kontrolinho/CICD-of-Java-Web-Application-using-Docker-Jenkins-Nexus-SonarQube-and-Terraform/blob/main/Read-Images/hosted1.png)
+
+
+Now click at **Create record**
+
+Under **Quick create record**
+
+**Record name**: Name your Record
+
+**Value**: Paste your **Private IPv4 IP** from AnsibleInstance.
+
+**Create Records**
+
+
+![alt text](https://github.com/kontrolinho/CICD-of-Java-Web-Application-using-Docker-Jenkins-Nexus-SonarQube-and-Terraform/blob/main/Read-Images/record1.png)
+
+
+
+## SSH Login Key in Jenkins Credentials
+
+```Jenkins Dashboard -> Manage Jenkins -> Manage Credentials```
+
+Under ```Stores scoped to Jenkins -> Jenkins -> Global Credentials -> Add Credentials```
+
+Kind -> **SSH Username with Private Key**
+
+**ID, Description**: AnsibleLogin
+
+**Username**: ubuntu
+
+at **Private Key** select **Enter Directly**
+
+And paste your Ansible Instance Private Keypair (open with notepad .pem and paste the key).
+
+So ansible will use this credential to login to App Server
+
+![alt text](https://github.com/kontrolinho/CICD-of-Java-Web-Application-using-Docker-Jenkins-Nexus-SonarQube-and-Terraform/blob/main/Read-Images/ansiblecred.png)
+
+
+## Installing Ansible in Jenkins Instance
+
+First of all **SSH into Jenkins Instance**.
+
+And now visit this [guide](https://docs.ansible.com/ansible/latest/installation_guide/installation_distros.html#installing-ansible-on-ubuntu) to install Ansible into Ubuntu.
+
+;;;ImageAnsibleInst
+
+And now install **Ansible Plugin** into **Jenkins**
+
+```Jenkins Dashboard -> Manage Jenkins -> Plugins -> Available Plugins```
+
+Search for **Ansible** and Install.
+
+![alt text](https://github.com/kontrolinho/CICD-of-Java-Web-Application-using-Docker-Jenkins-Nexus-SonarQube-and-Terraform/blob/main/Read-Images/ansibleinst.png)
+
+
+
+## Preparing Source Code
+
+Go to your repository folder
+
+There's a folder called Ansible, at this folders there's a playbooks, and some templates.
+
+## Executing Playbooks from our Jenkins Pipeline
+
+In ```Jenkinsfile``` at **Stage Ansible deploy to staging**, configure:
+
+**credentialsId**: Id from credentials of Ansible in Jenkins.
+
+**nexusip**: Private IPv4 from Nexus Instance.
+
+**reponame**: Release Repository Name from Nexus.
+
+![alt text](https://github.com/kontrolinho/CICD-of-Java-Web-Application-using-Docker-Jenkins-Nexus-SonarQube-and-Terraform/blob/main/Read-Images/ansplugin.png)
+
+
+
+In ```stage.inventory``` file at **Ansible Folder**, after ```[appsrvgrp]``` **configure**:
+
+**Hosted zone record name**
+
+![alt text](https://github.com/kontrolinho/CICD-of-Java-Web-Application-using-Docker-Jenkins-Nexus-SonarQube-and-Terraform/blob/main/Read-Images/stageinv.png)
+
+
+## Creating a Ansible Pipeline at Jenkins
+
+```Jenkins Dashboard -> New Item```
+
+**Name your new Pipeline**, and select **Pipeline**
+
+Mark **GitHub hook trigger for GITScm polling**
+ 
+Under **Pipeline** at **Definition** select **Pipeline script from SCM**:
+
+**SCM**: Git
+
+Under **Repositories** at **Repository URL**: Paste your **SSH from Repo Github**
+
+**Credentials**: select your **git credentials** (githublogin) 
+
+**Branch**: /cicd-jenkins
+
+
+
+## Edit Security Groups
+
+```AWS Console -> EC2 -> Security Group -> NexusSG -> Edit Inbound Rules```
+
+**Add Rule**
+
+**Port Range**: 8081
+
+**Source**: AnsibleSG
+
+
+
+** Managing Nexus Password from Jenkins
+
+```Jenkins Dashboard -> Manage Jenkins -> Credentials```
+
+Under **stores scoped to jenkins** -> ```System -> Global Credentials -> Add Credential```
+
+Under **Kind** -> **Secret Text**
+
+Secret: Type the Nexus Password
+
+Id, description: nexuspass
+
+
+## Ansible for Production
+
+
+```Ansible_Instance02.tf``` will create a instance for Ansible Prod, called **AnsibleInstance02**.
+
+Copy the **Private** IPv4 from AnsibleInstance02.
+
+Go to: ```Route 53 -> Hosted Zones```
+
+enter at your hosted zone and **Create Record**
+
+Under **Quick create record**:
+
+**Name**: Name your hosted zone
+
+**Value**: Paste your Private IPv4 IP.
+
+**Create Records**.
+
+![alt text](https://github.com/kontrolinho/CICD-of-Java-Web-Application-using-Docker-Jenkins-Nexus-SonarQube-and-Terraform/blob/main/Read-Images/hostedprod.png)
+
+
+## Prod Credentials in Jenkins
+
+```Jenkins Dashboard -> Manage Jenkins -> Credentials```
+
+Under **Stores scoped to jenkins** ->
+
+System -> Global Credentials -> Add Credentials
+
+Kind -> **SSH Username with Private Key**
+
+**ID, Description**: AnsibleLogin
+
+**Username**: ubuntu
+
+at **Private Key** select **Enter Directly**
+
+And paste your Ansible Instance Private Keypair (open with notepad .pem and paste the key).
+
+So ansible will use this credential to login to App Server
+
+![alt text](https://github.com/kontrolinho/CICD-of-Java-Web-Application-using-Docker-Jenkins-Nexus-SonarQube-and-Terraform/blob/main/Read-Images/sshprod.png)
+
+
+
+## Jenkinsfile for Prod
+
+At cicd-jenkins-prod Branch configure the ```Ansible/prod.inventory```
+
+Paste the correct Route 53 Record name for Prod. 
+
+Now at Jenkins create a new Pipeline for prod.
+
+```Jenkins Dashboard -> New Item```
+
+**Name your new Pipeline** and select **Pipeline**.
+
+Copy from your CICD-Ansible Pipeline.
+
+Under **Branches to Build** at **Branch Specifier**
+
+**Type your prod branch**: */cicd-jenkins-prod
+
+Build Now, and **cancel**, will appear a Button called: **Build Now With Parameters**.
+
+
+![alt text](https://github.com/kontrolinho/CICD-of-Java-Web-Application-using-Docker-Jenkins-Nexus-SonarQube-and-Terraform/blob/main/Read-Images/parameters.png)
+
+
+
+And now let's test our Production Pipeline with Ansible.
+
+
+
+![alt text](https://github.com/kontrolinho/CICD-of-Java-Web-Application-using-Docker-Jenkins-Nexus-SonarQube-and-Terraform/blob/main/Read-Images/finish1.png)
+
+![alt text](https://github.com/kontrolinho/CICD-of-Java-Web-Application-using-Docker-Jenkins-Nexus-SonarQube-and-Terraform/blob/main/Read-Images/finish2.png)
+
+![alt text](https://github.com/kontrolinho/CICD-of-Java-Web-Application-using-Docker-Jenkins-Nexus-SonarQube-and-Terraform/blob/main/Read-Images/finish3.png)
